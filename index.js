@@ -1,0 +1,22 @@
+const Client = require('./structures/bot/Client');
+const client = new Client();
+client.init();
+
+// <String>.toPropercase() returns a proper-cased string such as: 
+// "Mary had a little lamb".toProperCase() returns "Mary Had A Little Lamb"
+String.prototype.toProperCase = function () {
+  return this.replace(/([^\W_]+[^\s-]*) */g, (txt) => `${txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase()}`);
+};
+
+// These 2 process methods will catch exceptions and give *more details* about the error and stack trace.
+process.on("uncaughtException", (err) => {
+  const errorMsg = err.stack.replace(new RegExp(`${__dirname}/`, "g"), "./");
+  console.error("Uncaught Exception: ", errorMsg);
+  client.webhooks.error.send({content: `**${client?.user?.username || "???"} - uncaughtException:**\n\`\`\`\n${err.stack}`.slice(0,1995)+'\`\`\`', allowedMentions: { parse: [] } })
+  // process.exit(1);
+});
+
+process.on("unhandledRejection", err => {
+  console.error("Uncaught Promise Error: ", err);
+  client.webhooks.error.send({content: `**${client?.user?.username || "???"} - unhandledRejection:**\n\`\`\`\n${err.stack}`.slice(0,1995)+'\`\`\`', allowedMentions: { parse: [] } })
+});

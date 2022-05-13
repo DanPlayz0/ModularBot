@@ -1,0 +1,27 @@
+{
+  "name": "modularbot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "discord.js": "^13.6.0",
+    "ioredis": "^5.0.4",
+    "string-toolkit": "^1.6.6"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "shard": "node shard.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "modular",
+    "discord",
+    "bot",
+    "discordjs",
+    "modules",
+    "module",
+    "modularbot"
+  ],
+  "author": "DanPlayz0",
+  "license": "MIT",
+  "description": "A simple modular discord bot"
+}
